@@ -4,5 +4,13 @@ export default {
     googlebtn : require(`./img/googleBtn.png`),
     facebookbtn : require('./img/facebookBtn.png'),
     applebtn : require(`./img/appleBtn.png`),
-    eyeIcon : require(`./img/eyeIcon.png`)
+    eyeIcon : require(`./img/eyeIcon.png`),
+    homeIcon : require(`./img/home.png`),
+    searchIcon : require(`./img/search.png`),
+    planIcon : require(`./img/plan.png`),
+    guideIcon : require(`./img/guide.png`),
+    homeActiveIcon : require(`./img/activeHome.png`),
+    searchActiveIcon : require(`./img/activeSearch.png`),
+    planActiveIcon : require(`./img/activePlan.png`),
+    guideActiveIcon : require(`./img/activeGuide.png`),
 }

@@ -1,11 +1,13 @@
 import { NavigationContainer } from '@react-navigation/native';
 
 import AuthRoutes from './AuthRoutes';
+import TravelRoutes from './TravelRoutes';
 
 const MainRoutes = ()=>{
     return (
         <NavigationContainer>
-            <AuthRoutes />
+            {/* <AuthRoutes /> */}
+            <TravelRoutes />
         </NavigationContainer>
     )
 }
