@@ -1,15 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import WelcomeScreen from './screens/WelcomeScreen'
+import {StyleSheet, Text, View} from 'react-native';
+import React from 'react';
+
+import MainRoutes from './navigation/MainRoutes';
 
 const App = () => {
   return (
     <>
-     <WelcomeScreen />
+      <MainRoutes />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

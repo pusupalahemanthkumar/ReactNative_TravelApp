@@ -6,6 +6,7 @@ import {
   Dimensions,
 } from 'react-native';
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -16,6 +17,8 @@ import FullWidthBtn from '../components/UI/FullWidthBtn';
 const {width, height} = Dimensions.get('screen');
 
 const WelcomeScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={[GlobalStyles.screen, styles.screenContainer]}>
       <View style={StyleSheet.absoluteFillObject}>
@@ -32,7 +35,7 @@ const WelcomeScreen = () => {
           Explore the world never easy like now.
         </Text>
         <FullWidthBtn
-          onPress={() => {}}
+          onPress={() => {navigation.navigate('Login')}}
           rippleColor={GlobalColors.lightColor2}
           label="Login"
           containerStyle={{
@@ -42,8 +45,8 @@ const WelcomeScreen = () => {
           labelStyle={{color: GlobalColors.lightColor1}}
         />
         <FullWidthBtn
-          onPress={() => {}}
-          rippleColor={GlobalColors.primaryColor}
+          onPress={() => {navigation.navigate('Register')}}
+          rippleColor={GlobalColors.lightColor1}
           label="Register"
           containerStyle={{
             backgroundColor: GlobalColors.lightColor1,
