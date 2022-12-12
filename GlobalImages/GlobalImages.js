@@ -1,5 +1,6 @@
 export default {
     welcomeScreenWallpaper : `https://i.pinimg.com/736x/16/6a/4e/166a4e6fb817ded1f4002a27581d339c.jpg`,
+    homeScreenWallpaper : require(`./img/homeScreen.png`),
     backbtn : require(`./img/back.png`),
     googlebtn : require(`./img/googleBtn.png`),
     facebookbtn : require('./img/facebookBtn.png'),
@@ -13,4 +14,13 @@ export default {
     searchActiveIcon : require(`./img/activeSearch.png`),
     planActiveIcon : require(`./img/activePlan.png`),
     guideActiveIcon : require(`./img/activeGuide.png`),
+    qrIcon : require(`./img/qr.png`),
+    bellIcon : require(`./img/bell.png`),
+    flightIcon : require(`./img/flight.png`),
+    taxiIcon : require(`./img/taxi.png`),
+    carIcon : require(`./img/car.png`),
+    hotelIcon : require(`./img/hotel.png`),
+    bookmarkIcon : require(`./img/bookmark.png`),
+    starIcon : require(`./img/star.png`),
+    searchIcon1 : require(`./img/searchIcon.png`),
 }
