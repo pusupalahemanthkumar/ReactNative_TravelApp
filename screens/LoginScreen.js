@@ -31,6 +31,10 @@ const LoginScreen = () => {
 
   const loginHandler = () => {
     console.log('Login');
+    console.log({
+      email,
+      password
+    })
     dispatch(loginAsync(email, password));
   };
 

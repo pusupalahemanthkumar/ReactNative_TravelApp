@@ -110,68 +110,68 @@ const HomeScreen = () => {
 
   return (
     <View style={[GlobalStyles.screen]}>
-      <View style={[styles.showcaseContainer]}>
-        <ImageBackground
-          source={GlobalImages.homeScreenWallpaper}
-          style={[styles.backgroundImage]}>
-          <ShowcaseHeaderTop
-            profileUri={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80`}
-            onPressQR={() => {}}
-            onPressBell={() => {}}
-            onPressprofile={() => {}}
-          />
-          <View style={[styles.showcasebottom, GlobalStyles.container]}>
-            <Text style={[styles.showcaseTitle]}>
-              Where's your next destination ?
-            </Text>
-            <ScrollView horizontal>
-              {CARD_DATA.map(item => {
-                return (
-                  <ShowcaseIconCard
-                    key={item.id}
-                    name={item.name}
-                    icon={item.icon}
-                  />
-                );
-              })}
-            </ScrollView>
-          </View>
-        </ImageBackground>
-      </View>
-      <View style={[styles.mainContainer, GlobalStyles.container]}>
-        <Text style={styles.homeTitle}> Deals</Text>
-        <ScrollView horizontal>
-          {NAV_DATA.map(item => {
-            let containerstyle = [styles.navLink];
-            let textstyle = [styles.navText];
-            if (item.name === selectedNav) {
-              containerstyle.push(styles.activeNav);
-              textstyle.push(styles.activeText);
-            }
-            return (
-              <Pressable
-                key={item.id}
-                onPress={() => setSelectedNav(item.name)}
-                style={containerstyle}>
-                <Text style={textstyle}>{item.name}</Text>
-              </Pressable>
-            );
-          })}
-        </ScrollView>
-        <View style={[styles.container]}>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={DATA}
-            keyExtractor={item => item.id}
-            renderItem={({item}) => {
-              return (
-               <PlaceCard  item={item} onPress={()=>{}} />
-              );
-            }}
-          />
+      <ScrollView>
+        <View style={[styles.showcaseContainer]}>
+          <ImageBackground
+            source={GlobalImages.homeScreenWallpaper}
+            style={[styles.backgroundImage]}>
+            <ShowcaseHeaderTop
+              profileUri={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80`}
+              onPressQR={() => {}}
+              onPressBell={() => {}}
+              onPressprofile={() => {}}
+            />
+            <View style={[styles.showcasebottom, GlobalStyles.container]}>
+              <Text style={[styles.showcaseTitle]}>
+                Where's your next destination ?
+              </Text>
+              <ScrollView horizontal>
+                {CARD_DATA.map(item => {
+                  return (
+                    <ShowcaseIconCard
+                      key={item.id}
+                      name={item.name}
+                      icon={item.icon}
+                    />
+                  );
+                })}
+              </ScrollView>
+            </View>
+          </ImageBackground>
         </View>
-      </View>
+        <View style={[styles.mainContainer, GlobalStyles.container]}>
+          <Text style={styles.homeTitle}> Deals</Text>
+          <ScrollView horizontal>
+            {NAV_DATA.map(item => {
+              let containerstyle = [styles.navLink];
+              let textstyle = [styles.navText];
+              if (item.name === selectedNav) {
+                containerstyle.push(styles.activeNav);
+                textstyle.push(styles.activeText);
+              }
+              return (
+                <Pressable
+                  key={item.id}
+                  onPress={() => setSelectedNav(item.name)}
+                  style={containerstyle}>
+                  <Text style={textstyle}>{item.name}</Text>
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+          <View style={[styles.container]}>
+            <FlatList
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              data={DATA}
+              keyExtractor={item => item.id}
+              renderItem={({item}) => {
+                return <PlaceCard item={item} onPress={() => {}} />;
+              }}
+            />
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -227,5 +227,4 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginVertical: 20,
   },
- 
 });

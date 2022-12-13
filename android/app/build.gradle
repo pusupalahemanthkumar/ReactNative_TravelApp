@@ -249,6 +249,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-fs')
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion

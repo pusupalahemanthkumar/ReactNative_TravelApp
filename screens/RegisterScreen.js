@@ -11,6 +11,7 @@ import {
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
+import {types} from 'react-native-document-picker';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -27,6 +28,8 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [confirmPassword, setConfirmPassword] = useState();
+  const [phoneNumber, setPhoneNumber] = useState();
+  const [profileImage, setProfileImage] = useState();
 
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -34,8 +37,15 @@ const RegisterScreen = () => {
 
   const registerHandler = () => {
     console.log('Register');
-    dispatch( registerAync(username, email, password, confirmPassword));
-   
+    console.log({
+      username,
+      email,
+      password,
+      confirmPassword,
+      phoneNumber,
+      profileImage,
+    });
+    dispatch(registerAync(username, email, password, confirmPassword));
   };
 
   return (
@@ -61,6 +71,23 @@ const RegisterScreen = () => {
             value={email}
             onChangeText={val => {
               setEmail(val);
+            }}
+          />
+          <GenericInput
+            type="PHONE_NUMBER"
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChangeText={val => {
+              setPhoneNumber(val);
+            }}
+          />
+          <GenericInput
+            type="DOCUMENT"
+            placeholder="Upload Photo"
+            docTypes={[types.images]}
+            onDocumentSelect={res => {
+              console.log('document', res);
+              setProfileImage(res[0]);
             }}
           />
           <GenericInput
@@ -116,5 +143,5 @@ export default RegisterScreen;
 const styles = StyleSheet.create({
   formContainer: {
     marginTop: 30,
-  }
+  },
 });
