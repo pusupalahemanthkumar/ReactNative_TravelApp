@@ -16,12 +16,12 @@ import GlobalColors from "../../GlobalStyles/colors";
 const AuthBottomActions = (props) => {
   return (
     <>
-      <View style={[styles.orHeader]}>
+      <View style={[styles.orHeader, GlobalStyles.container]}>
         <View style={[styles.line]}></View>
         <Text style={[styles.orText]}>{props.orTitle}</Text>
         <View style={[styles.line]}></View>
       </View>
-      <View style={[styles.optionsContainer]}>
+      <View style={[styles.optionsContainer, GlobalStyles.container]}>
         <Image
           source={GlobalImages.facebookbtn}
           style={[GlobalStyles.imageFull, styles.btn]}
@@ -35,7 +35,7 @@ const AuthBottomActions = (props) => {
           style={[GlobalStyles.imageFull, styles.btn]}
         />
       </View>
-      <View style={[styles.footerContainer]}>
+      <View style={[styles.footerContainer, GlobalStyles.container]}>
         <Text style={[styles.footerText]}>{props.footerText}</Text>
         <Pressable onPress={ props.onPressFooterLink}>
           <Text style={[styles.footerLinkText]}>{props.footerLinkText}</Text>
@@ -52,7 +52,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 20,
-    marginHorizontal: 20,
   },
   line: {
     flex: 4,
@@ -70,7 +69,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginHorizontal: 20,
     marginVertical: 30,
   },
   btn: {
@@ -80,7 +78,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     flexDirection: 'row',
     justifyContent: 'center',
-    marginBottom: 40,
+    marginTop: 40,
   },
   footerText: {
     color: GlobalColors.darkColor2,
@@ -89,5 +87,6 @@ const styles = StyleSheet.create({
   footerLinkText: {
     color: GlobalColors.primaryColor,
     fontSize: 15,
+    marginBottom: 10,
   },
 });

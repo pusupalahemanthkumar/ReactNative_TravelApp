@@ -5,9 +5,11 @@ import {
   Image,
   Pressable,
   TextInput,
+  ActivityIndicator,
 } from 'react-native';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -16,43 +18,64 @@ import Fontconfig from '../GlobalStyles/Fontconfig';
 import GoBackBtn from '../components/UI/GoBackBtn';
 import FullWidthBtn from '../components/UI/FullWidthBtn';
 import AuthBottomActions from '../components/AppComponents/AuthBottomActions';
+import {loginAsync} from '../store/dux/userRedux';
+import GenericInput from '../components/UI/GenericInput';
 
 const LoginScreen = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {loading, error, user} = useSelector(state => state.user);
+
+  const loginHandler = () => {
+    console.log('Login');
+    dispatch(loginAsync(email, password));
+  };
+
   return (
     <View style={[GlobalStyles.screen]}>
       <GoBackBtn />
-      <Text style={[styles.title]}>Welcome back! Glad to see you. Again!</Text>
-      <View style={[styles.formContainer]}>
-        <View style={[styles.inputContainer]}>
-          <TextInput
-            style={[styles.input]}
-            placeholder="Enter your email"
-            secureTextEntry={false}
-          />
-        </View>
-        <View style={[styles.inputContainer]}>
-          <TextInput
-            style={[styles.input]}
-            placeholder="Enter your password"
-            secureTextEntry={true}
-          />
-          <Pressable>
-            <Image source={GlobalImages.eyeIcon} style={{marginRight: 10}} />
-          </Pressable>
-        </View>
-        <FullWidthBtn
-          onPress={() => {}}
-          rippleColor={GlobalColors.lightColor2}
-          label="Login"
-          containerStyle={{
-            backgroundColor: GlobalColors.primaryColor,
-            opacity: 0.7,
-            marginTop: 30,
-            width: '100%',
-          }}
-          labelStyle={{color: GlobalColors.lightColor1}}
+      <Text style={[GlobalStyles.screenTitleText, GlobalStyles.container]}>
+        Welcome back! Glad to see you. Again!
+      </Text>
+      <View style={[styles.formContainer, GlobalStyles.container]}>
+      {error && (
+          <Text style={GlobalStyles.errorText}>
+            Invalid Data !!
+          </Text>
+        )}
+        <GenericInput
+          type="TEXT"
+          placeholder="Enter your email"
+          onChangeText={val => setEmail(val)}
+          value={email}
         />
+        <GenericInput
+          type="PASSWORD"
+          placeholder="Enter your password"
+          onChangeText={val => setPassword(val)}
+          value={password}
+        />
+        {!loading  ? (
+          <FullWidthBtn
+            onPress={() => {
+              loginHandler();
+            }}
+            rippleColor={GlobalColors.lightColor2}
+            label="Login"
+            containerStyle={{
+              backgroundColor: GlobalColors.primaryColor,
+              opacity: 0.7,
+              marginTop: 30,
+              width: '100%',
+            }}
+            labelStyle={{color: GlobalColors.lightColor1}}
+          />
+        ) : (
+          <ActivityIndicator size={'large'} />
+        )}
       </View>
       <AuthBottomActions
         orTitle={`Or Login With`}
@@ -69,32 +92,7 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  title: {
-    marginHorizontal: 20,
-    marginVertical: 20,
-    width: '80%',
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: GlobalColors.darkColor2,
-  },
   formContainer: {
-    marginHorizontal: 20,
     marginTop: 30,
-  },
-  inputContainer: {
-    width: '100%',
-    backgroundColor: GlobalColors.greyShade2,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    borderWidth: 1,
-    borderColor: GlobalColors.greyShade2,
-    marginBottom: 20,
-  },
-  input: {
-    backgroundColor: GlobalColors.greyShade2,
-    fontSize: 15,
-    paddingHorizontal: 10,
-    paddingVertical: 15,
-  },
+  }
 });

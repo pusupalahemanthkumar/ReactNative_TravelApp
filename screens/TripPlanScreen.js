@@ -80,8 +80,8 @@ const TripPlanScreen = () => {
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
-        <Text style={styles.screenTitle}>Trip Plan</Text>
-        <ScrollView horizontal contentContainerStyle={{marginHorizontal: 20}}>
+        <Text style={GlobalStyles.screenTitleText2}>Trip Plan</Text>
+        <ScrollView horizontal contentContainerStyle={GlobalStyles.container}>
           {NAV_DATA.map(item => {
             let containerstyle = [styles.navLink];
             let textstyle = [styles.navText];
@@ -123,13 +123,6 @@ const TripPlanScreen = () => {
 export default TripPlanScreen;
 
 const styles = StyleSheet.create({
-  screenTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 22,
-    marginHorizontal: 20,
-    color: GlobalColors.darkColor2,
-  },
   navLink: {
     marginRight: 10,
     padding: 10,

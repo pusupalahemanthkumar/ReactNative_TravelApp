@@ -120,7 +120,7 @@ const HomeScreen = () => {
             onPressBell={() => {}}
             onPressprofile={() => {}}
           />
-          <View style={[styles.showcasebottom]}>
+          <View style={[styles.showcasebottom, GlobalStyles.container]}>
             <Text style={[styles.showcaseTitle]}>
               Where's your next destination ?
             </Text>
@@ -138,7 +138,7 @@ const HomeScreen = () => {
           </View>
         </ImageBackground>
       </View>
-      <View style={[styles.mainContainer]}>
+      <View style={[styles.mainContainer, GlobalStyles.container]}>
         <Text style={styles.homeTitle}> Deals</Text>
         <ScrollView horizontal>
           {NAV_DATA.map(item => {
@@ -191,10 +191,9 @@ const styles = StyleSheet.create({
   },
   showcasebottom: {
     marginVertical: 22,
-    marginHorizontal: 20,
   },
   showcaseTitle: {
-    fontSize: 28,
+    fontSize: Fontconfig.TEXT_SIZE_2,
     color: GlobalColors.lightColor1,
     fontWeight: 'bold',
     width: '70%',
@@ -202,10 +201,9 @@ const styles = StyleSheet.create({
   },
   mainContainer: {
     marginVertical: 22,
-    marginHorizontal: 20,
   },
   homeTitle: {
-    fontSize: 20,
+    fontSize: Fontconfig.TEXT_SIZE_3,
     fontWeight: 'bold',
     color: GlobalColors.darkColor2,
   },

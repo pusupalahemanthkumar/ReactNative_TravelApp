@@ -66,7 +66,7 @@ const SearchScreen = () => {
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
-        <Text style={styles.screenTitle}>Trip Plan</Text>
+        <Text style={GlobalStyles.screenTitleText2}>Trip Plan</Text>
         <View style={[styles.searchBarContainer]}>
           <TextInput
             style={[styles.searchInput]}
@@ -74,8 +74,8 @@ const SearchScreen = () => {
           />
           <Image source={GlobalImages.searchIcon1} />
         </View>
-        <Text style={styles.TextM}>TOP DESTINATIONS</Text>
-        <View style={[styles.container]}>
+        <Text style={GlobalStyles.TextM}>TOP DESTINATIONS</Text>
+        <View style={[GlobalStyles.container]}>
           <FlatList
             showsHorizontalScrollIndicator={false}
             horizontal
@@ -92,8 +92,8 @@ const SearchScreen = () => {
             }}
           />
         </View>
-        <Text style={styles.TextM}>NEARBY ATTRACTIONS</Text>
-        <View style={[styles.container2]}>
+        <Text style={GlobalStyles.TextM}>NEARBY ATTRACTIONS</Text>
+        <View style={[styles.container, GlobalStyles.container]}>
           <FlatList
             showsHorizontalScrollIndicator={false}
             data={DATA}
@@ -122,13 +122,6 @@ const SearchScreen = () => {
 export default SearchScreen;
 
 const styles = StyleSheet.create({
-  screenTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 22,
-    marginHorizontal: 20,
-    color: GlobalColors.darkColor2,
-  },
   TextM: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -149,12 +142,7 @@ const styles = StyleSheet.create({
     color: GlobalColors.greyShade1,
     fontSize: 16,
   },
-  container: {
-    marginHorizontal: 20,
-  },
-  container2 :{
-    marginHorizontal: 20,
+  container:{
     paddingBottom : 80,
-
   }
 });

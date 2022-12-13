@@ -16,6 +16,8 @@ import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
 import GlobalColors from '../GlobalStyles/colors';
 import Fontconfig from '../GlobalStyles/Fontconfig';
+import TipCard from '../components/AppComponents/TipCard';
+import ArticleCard from '../components/AppComponents/ArticleCard';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -63,14 +65,14 @@ const GuideScreen = () => {
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
-        <Text style={styles.screenTitle}>Guide</Text>
+        <Text style={GlobalStyles.screenTitleText2}>Guide</Text>
         <View style={[styles.HeaderRow]}>
           <Text style={styles.TextM}>MIGHT NEED THESE</Text>
           <Pressable>
             <Text style={[styles.LinkText]}>See More</Text>
           </Pressable>
         </View>
-        <View style={styles.container}>
+        <View style={[styles.container , GlobalStyles.container]}>
           <FlatList
             data={GUIDE_DATA}
             keyExtractor={item => item.id}
@@ -78,15 +80,7 @@ const GuideScreen = () => {
             horizontal
             renderItem={({item}) => {
               return (
-                <Pressable style={[styles.tipCard]} onPress={() => {}}>
-                  <ImageBackground
-                    source={{uri: item.image}}
-                    style={[styles.tipCardImgBackground]}>
-                    <View style={[styles.tipCardBody]}>
-                      <Text style={[styles.tipName]}>{item.name}</Text>
-                    </View>
-                  </ImageBackground>
-                </Pressable>
+               <TipCard  item={item} onPress={()=>{}} />
               );
             }}
           />
@@ -104,7 +98,7 @@ const GuideScreen = () => {
             <Text style={[styles.LinkText]}>See More</Text>
           </Pressable>
         </View>
-        <View style={styles.container2}>
+        <View style={[styles.container2, GlobalStyles.container]}>
           <FlatList
             data={ARTICLE_DATA}
             keyExtractor={item => item.id}
@@ -112,21 +106,7 @@ const GuideScreen = () => {
             horizontal
             renderItem={({item}) => {
               return (
-                <Pressable style={[styles.articleCard]} onPress={() => {}}>
-                  <View style={[styles.articleImageContainer]}>
-                    <Image
-                      source={{uri: item.image}}
-                      style={[
-                        GlobalStyles.imageFull,
-                        {borderRadius: 20, overflow: 'hidden'},
-                      ]}
-                    />
-                  </View>
-                  <Text style={[styles.articleCardTag]}>EXPERIENCE</Text>
-                  <Text style={[styles.articleHeadLine]}>
-                  {item.headLine}
-                  </Text>
-                </Pressable>
+                <ArticleCard item={item} onPress={()=>{}} />
               );
             }}
           />
@@ -139,13 +119,6 @@ const GuideScreen = () => {
 export default GuideScreen;
 
 const styles = StyleSheet.create({
-  screenTitle: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 22,
-    marginHorizontal: 20,
-    color: GlobalColors.darkColor2,
-  },
   TextM: {
     fontSize: 18,
     fontWeight: 'bold',
@@ -163,43 +136,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   container: {
-    marginHorizontal: 20,
     marginVertical: 22,
   },
   container2 :{
-    marginHorizontal: 20,
     marginVertical: 22,
     paddingBottom : 100,
   },
-  tipCard: {
-    width: 150,
-    height: 150,
-    borderRadius: 10,
-    marginRight: 20,
-  },
-  tipCardImgBackground: {
-    width: '100%',
-    height: '100%',
-    resizeMode: 'cover',
-    borderRadius: 10,
-    overflow: 'hidden',
-    justifyContent: 'flex-end',
-    // opacity : 0.8,
-  },
-  tipCardBody: {
-    alignItems: 'center',
-  },
-  tipName: {
-    color: GlobalColors.lightColor1,
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 3,
-  },
-  tipLocation: {
-    color: GlobalColors.lightColor1,
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
+
   searchBarContainer: {
     marginHorizontal: 20,
     flexDirection: 'row',
@@ -212,26 +155,5 @@ const styles = StyleSheet.create({
     width: '90%',
     color: GlobalColors.greyShade1,
     fontSize: 16,
-  },
-
-  articleCard: {
-    marginRight: 20,
-    width: width - 50,
-  },
-  articleImageContainer: {
-    width: '100%',
-    height: 200,
-    marginBottom: 10,
-  },
-  articleCardTag: {
-    width: '80%',
-    color: '#0048F0',
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  articleHeadLine: {
-    width: '80%',
-    color: GlobalColors.darkColor2,
-    fontSize: 15,
   },
 });
