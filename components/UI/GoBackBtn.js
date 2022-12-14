@@ -19,9 +19,11 @@ export default GoBackBtn;
 
 const styles = StyleSheet.create({
   backbtnContainer: {
-    marginTop: 20,
-    marginLeft: 20,
+    position :'absolute',
+    top: 20,
+    left : 20,
     width: 41,
     height: 41,
+    zIndex : 100,
   },
 });

@@ -27,7 +27,7 @@ const ArticleCard = ({item, onPress}) => {
         />
       </View>
       <Text style={[styles.articleCardTag]}>EXPERIENCE</Text>
-      <Text style={[styles.articleHeadLine]}>{item.headLine}</Text>
+      <Text style={[styles.articleHeadLine]}>{item.title}</Text>
     </Pressable>
   );
 };

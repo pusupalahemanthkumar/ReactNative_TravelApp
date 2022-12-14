@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
   },
   screenTitleText: {
     marginVertical: 20,
+    marginTop : 80,
     width: '80%',
     fontSize: Fontconfig.TEXT_SIZE_1,
     fontWeight: 'bold',

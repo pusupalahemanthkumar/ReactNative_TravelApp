@@ -11,6 +11,7 @@ import {
   Image,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -18,6 +19,8 @@ import GlobalColors from '../GlobalStyles/colors';
 import Fontconfig from '../GlobalStyles/Fontconfig';
 import TipCard from '../components/AppComponents/TipCard';
 import ArticleCard from '../components/AppComponents/ArticleCard';
+
+import { articles, tips } from '../Data';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -39,29 +42,29 @@ const GUIDE_DATA = [
   },
 ];
 
-const ARTICLE_DATA =[
+const ARTICLE_DATA = [
   {
     id: '1',
     name: 'Budget Travel',
-    image : `https://imageio.forbes.com/specials-images/imageserve/62f2863deb9b0c0cd1fe6374/fall-travel-cheaper/0x0.jpg?format=jpg&width=960`,
-    headLine : `How to have an amazing holiday while traveling on a budget.`
+    image: `https://imageio.forbes.com/specials-images/imageserve/62f2863deb9b0c0cd1fe6374/fall-travel-cheaper/0x0.jpg?format=jpg&width=960`,
+    headLine: `How to have an amazing holiday while traveling on a budget.`,
   },
   {
     id: '2',
     name: 'First Time Aboard',
     image: `https://www.tataaig.com/s3/medium_senior-citizens-travel-insurance_cd09659466.jpeg`,
-    headLine : `Air travel with a baby will never be a nightmare again with these tips.`
+    headLine: `Air travel with a baby will never be a nightmare again with these tips.`,
   },
   {
     id: '3',
     name: 'Safe Travel',
     image: `https://chopra.brightspotcdn.com/dims4/default/5a343c1/2147483647/strip/true/crop/533x300+55+0/resize/1200x675!/quality/90/?url=http%3A%2F%2Fchopra-brightspot.s3.amazonaws.com%2F61%2Fcc%2F9b0ff8c8aaba0ff21eafee50293c%2F6reasonswhytravelingisgoodforyou.jpg`,
-    headLine : `A practical guide on how to pack lightly for a long trip.`
+    headLine: `A practical guide on how to pack lightly for a long trip.`,
   },
-
-]
+];
 
 const GuideScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
@@ -72,15 +75,23 @@ const GuideScreen = () => {
             <Text style={[styles.LinkText]}>See More</Text>
           </Pressable>
         </View>
-        <View style={[styles.container , GlobalStyles.container]}>
+        <View style={[styles.container, GlobalStyles.container]}>
           <FlatList
-            data={GUIDE_DATA}
+            data={tips}
             keyExtractor={item => item.id}
             showsHorizontalScrollIndicator={false}
             horizontal
             renderItem={({item}) => {
               return (
-               <TipCard  item={item} onPress={()=>{}} />
+                <TipCard
+                  item={item}
+                  onPress={() => {
+                    navigation.navigate('Guide', {
+                      screen: 'ArticleDetail',
+                      params : { article : item }
+                    });
+                  }}
+                />
               );
             }}
           />
@@ -100,13 +111,21 @@ const GuideScreen = () => {
         </View>
         <View style={[styles.container2, GlobalStyles.container]}>
           <FlatList
-            data={ARTICLE_DATA}
+            data={articles}
             keyExtractor={item => item.id}
             showsHorizontalScrollIndicator={false}
             horizontal
             renderItem={({item}) => {
               return (
-                <ArticleCard item={item} onPress={()=>{}} />
+                <ArticleCard
+                  item={item}
+                  onPress={() => {
+                    navigation.navigate('Guide', {
+                      screen: 'ArticleDetail',
+                      params : { article : item }
+                    });
+                  }}
+                />
               );
             }}
           />
@@ -138,9 +157,9 @@ const styles = StyleSheet.create({
   container: {
     marginVertical: 22,
   },
-  container2 :{
+  container2: {
     marginVertical: 22,
-    paddingBottom : 100,
+    paddingBottom: 100,
   },
 
   searchBarContainer: {

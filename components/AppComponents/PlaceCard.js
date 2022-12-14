@@ -23,7 +23,7 @@ const PlaceCard = ({item,placeCardStyle, onPress}) => {
         style={[styles.placeCardImgBackground]}>
         <View style={[styles.placeCardHeader]}>
           <View style={[styles.placeCategory]}>
-            <Text style={[styles.placeCategoryText]}>Hotel</Text>
+            <Text style={[styles.placeCategoryText]}>{item.category}</Text>
           </View>
           <View style={[styles.savePlacebtn]}>
             <Image

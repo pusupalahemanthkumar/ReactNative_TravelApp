@@ -11,7 +11,7 @@ const AuthRoutes = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-        animation :'slide_from_left',
+        animation: 'slide_from_left',
       }}>
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
