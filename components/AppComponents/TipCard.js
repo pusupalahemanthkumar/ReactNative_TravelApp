@@ -19,7 +19,7 @@ const TipCard = ({item, onPress}) => {
         source={{uri: item.image}}
         style={[styles.tipCardImgBackground]}>
         <View style={[styles.tipCardBody]}>
-          <Text style={[styles.tipName]}>{item.name}</Text>
+          <Text style={[styles.tipName]}>{item.title}</Text>
         </View>
       </ImageBackground>
     </Pressable>

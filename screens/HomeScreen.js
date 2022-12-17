@@ -8,10 +8,12 @@ import {
   Pressable,
   ScrollView,
   FlatList,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
-import { useNavigation } from '@react-navigation/native';
-
+import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -20,7 +22,7 @@ import Fontconfig from '../GlobalStyles/Fontconfig';
 import ShowcaseIconCard from '../components/AppComponents/ShowcaseIconCard';
 import ShowcaseHeaderTop from '../components/AppComponents/ShowcaseHeaderTop';
 import PlaceCard from '../components/AppComponents/PlaceCard';
-import { Places } from '../Data';
+import {getDealsAsync} from '../store/dux/placeRedux';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -62,22 +64,32 @@ const NAV_DATA = [
   },
 ];
 const HomeScreen = () => {
+  const isFocused = useIsFocused();
   const [selectedNav, setSelectedNav] = useState('All');
   const [placesList, setPlacesList] = useState([]);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    setPlacesList(Places);
-  },[]);
+  const {deals, dealsLoading, dealsError} = useSelector(state => state.place);
 
-  const filterChangeHandler = (type)=>{
-    setSelectedNav(type)
-    if(type === 'All'){
-      setPlacesList(Places);
-    }else{
-      setPlacesList(Places.filter((item)=> item.category === type ));
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(getDealsAsync());
     }
-  }
+  }, [isFocused]);
+
+  useEffect(() => {
+    setPlacesList(deals);
+  }, [deals]);
+
+  const filterChangeHandler = type => {
+    setSelectedNav(type);
+    if (type === 'All') {
+      setPlacesList(deals);
+    } else {
+      setPlacesList(deals.filter(item => item.category.includes(type)));
+    }
+  };
 
   return (
     <View style={[GlobalStyles.screen]}>
@@ -130,21 +142,30 @@ const HomeScreen = () => {
               );
             })}
           </ScrollView>
-          <View style={[styles.container, {paddingBottom : 60,}]}>
-            <FlatList
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              data={placesList}
-              keyExtractor={item => item.id}
-              renderItem={({item}) => {
-                return <PlaceCard item={item} onPress={() => { 
-                  navigation.navigate('Home',{
-                    screen :"PlaceDetail",
-                    params : { place : item }
-                  })
-                }} />;
-              }}
-            />
+          <View style={[styles.container, {paddingBottom: 60}]}>
+            {dealsLoading ? (
+              <ActivityIndicator size={'large'} />
+            ) : (
+              <FlatList
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                data={placesList}
+                keyExtractor={item => item.id}
+                renderItem={({item}) => {
+                  return (
+                    <PlaceCard
+                      item={item}
+                      onPress={() => {
+                        navigation.navigate('Home', {
+                          screen: 'PlaceDetail',
+                          params: {place: item},
+                        });
+                      }}
+                    />
+                  );
+                }}
+              />
+            )}
           </View>
         </View>
       </ScrollView>

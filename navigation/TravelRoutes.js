@@ -9,6 +9,7 @@ import PlaceDetailScreen from '../screens/PlaceDetailScreen';
 import GlobalImages from '../GlobalImages/GlobalImages';
 import {Image} from 'react-native';
 import ArticleDetailsScreen from '../screens/ArticleDetailsScreen';
+import PlaceOrderScreen from '../screens/PlaceOrderScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,6 +24,7 @@ const HomeStack = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 };
@@ -36,6 +38,7 @@ const SearchStack =() =>{
       }}>
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 
@@ -50,6 +53,7 @@ const TripPlanStack = () =>{
       }}>
       <Stack.Screen name="TripPlanScreen" component={TripPlanScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
+      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 

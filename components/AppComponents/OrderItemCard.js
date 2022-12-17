@@ -3,23 +3,38 @@ import React from 'react';
 
 import GlobalImages from '../../GlobalImages/GlobalImages';
 import GlobalStyles from '../../GlobalStyles/styles';
-import GlobalColors from "../../GlobalStyles/colors";
+import GlobalColors from '../../GlobalStyles/colors';
 
 const {width, height} = Dimensions.get('screen');
 
 const OrderItemCard = ({item}) => {
   return (
     <View style={[styles.orderContainer]}>
-    <View style={[styles.orderPlaceImage]}>
-      <Image  source={{uri : item.images[1]}} style={[GlobalStyles.imageFull, {  borderRadius : 10,}]}/>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Order Id :</Text>
+        <Text style={[styles.text]}>123246</Text>
+      </View>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Place:</Text>
+        <Text style={[styles.text]}>Hyderabad</Text>
+      </View>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Date :</Text>
+        <Text style={[styles.text]}> 1-01-2023</Text>
+      </View>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Price:</Text>
+        <Text style={[styles.text]}>12000 Rs</Text>
+      </View>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Travel Agent Contact:</Text>
+        <Text style={[styles.text]}>1234567891</Text>
+      </View>
+      <View style={[styles.row]}>
+        <Text style={[styles.heading]}>Payment Status :</Text>
+        <Text style={[styles.text]}>Pending</Text>
+      </View>
     </View>
-    <View style={[styles.OrderDetailsContainer]}>
-      <Text style={[styles.orderTitle]}><Text style={[styles.Heading]}>Place :</Text> {item.placeName}</Text>
-      <Text style={[styles.orderTitle]}><Text style={[styles.Heading]}>Start Date :</Text> {item.startDate}</Text>
-      <Text style={[styles.orderTitle]}><Text style={[styles.Heading]}>End Date :</Text> {item.endDate}</Text>
-      <Text style={[styles.orderTitle]}><Text style={[styles.Heading]}>Payment :</Text>{item.payment}</Text>
-    </View>
-  </View>
   );
 };
 
@@ -29,28 +44,25 @@ const styles = StyleSheet.create({
   orderContainer: {
     marginBottom: 15,
     width: width - 40,
-    flexDirection: 'row',
-    alignItems: 'flex-start',
     backgroundColor: GlobalColors.lightColor2,
     paddingVertical: 10,
     paddingHorizontal: 10,
     borderRadius: 10,
     elevation: 8,
   },
-  orderPlaceImage: {
-    width: width / 3,
-    height: 100,
-    borderRadius: 10,
+  row :{
+    flexDirection : "row",
+    justifyContent : 'space-between',
+    paddingVertical : 10,
+    paddingHorizontal : 10,
+    borderColor : GlobalColors.greyShade2,
+    borderBottomWidth : 1,
   },
-  OrderDetailsContainer: {
-    marginLeft: 10,
+  heading :{
+    fontWeight :'bold',
+    fontSize : 15,
   },
-  orderTitle: {
-    fontSize: 14,
-    marginBottom: 4,
-  },
-  Heading: {
-    fontWeight: 'bold',
-    // color : GlobalColors.darkColor2
-  },
+  text : {
+    fontSize : 15,
+  }
 });

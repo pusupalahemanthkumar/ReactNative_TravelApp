@@ -47,7 +47,7 @@ const LoginScreen = () => {
       <View style={[styles.formContainer, GlobalStyles.container]}>
       {error && (
           <Text style={GlobalStyles.errorText}>
-            Invalid Data !!
+            {error}
           </Text>
         )}
         <GenericInput

@@ -8,8 +8,16 @@ import GlobalStyles from '../../GlobalStyles/styles';
 const GoBackBtn = props => {
   const navigation = useNavigation();
 
+  const goBackHandler = ()=>{
+    if(props.customPressHandler){
+      props.customPressHandler();
+    }else{
+      navigation.goBack()
+    }
+  }
+
   return (
-    <Pressable style={[styles.backbtnContainer, props.style]} onPress={()=> {navigation.goBack()}} >
+    <Pressable style={[styles.backbtnContainer, props.style]} onPress={goBackHandler} >
       <Image source={GlobalImages.backbtn} style={[GlobalStyles.imageFull]} />
     </Pressable>
   );

@@ -26,7 +26,7 @@ const ArticleCard = ({item, onPress}) => {
           ]}
         />
       </View>
-      <Text style={[styles.articleCardTag]}>EXPERIENCE</Text>
+      <Text style={[styles.articleCardTag]}>{item.category[0]}</Text>
       <Text style={[styles.articleHeadLine]}>{item.title}</Text>
     </Pressable>
   );

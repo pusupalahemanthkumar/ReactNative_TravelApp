@@ -1,9 +1,11 @@
 import {StyleSheet, Text, View, Dimensions, Pressable, ImageBackground, Image} from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 
 import GlobalImages from '../../GlobalImages/GlobalImages';
 import GlobalStyles from '../../GlobalStyles/styles';
 import GlobalColors from '../../GlobalStyles/colors';
+import { toogleBookmarkAsync } from "../../store/dux/userRedux"
 
 const {width, height} = Dimensions.get('screen');
 
@@ -16,6 +18,15 @@ const {width, height} = Dimensions.get('screen');
 */
 
 const PlaceCard = ({item,placeCardStyle, onPress}) => {
+  const dispatch = useDispatch();
+  const {
+   bookmarks
+  } = useSelector(state => state.user.user);
+  const [isSaved, setIsSaved] = useState(bookmarks.includes(item._id));
+  const onCardClickHandler = () =>{
+    setIsSaved((prev)=> !prev);
+    dispatch(toogleBookmarkAsync(item._id));
+  }
   return (
     <Pressable style={[styles.placeCard , placeCardStyle] } onPress={onPress}>
       <ImageBackground
@@ -23,14 +34,14 @@ const PlaceCard = ({item,placeCardStyle, onPress}) => {
         style={[styles.placeCardImgBackground]}>
         <View style={[styles.placeCardHeader]}>
           <View style={[styles.placeCategory]}>
-            <Text style={[styles.placeCategoryText]}>{item.category}</Text>
+            <Text style={[styles.placeCategoryText]}>{item.category[0]}</Text>
           </View>
-          <View style={[styles.savePlacebtn]}>
+          <Pressable style={[styles.savePlacebtn]} onPress = {onCardClickHandler}>
             <Image
-              style={[styles.savePlaceIcon]}
+              style={[styles.savePlaceIcon, isSaved && {tintColor : '#FFC000', }]}
               source={GlobalImages.bookmarkIcon}
             />
-          </View>
+          </Pressable>
         </View>
         <View style={[styles.placeCardBody]}>
           <Text style={[styles.placeName]}>{item.placeName}</Text>
@@ -81,7 +92,7 @@ const styles = StyleSheet.create({
     color: GlobalColors.lightColor1,
   },
   savePlacebtn: {
-    backgroundColor: GlobalColors.lightColor1,
+    backgroundColor: GlobalColors.darkColor2,
     opacity: 0.5,
     padding: 5,
     borderRadius: 2,

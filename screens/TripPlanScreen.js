@@ -7,9 +7,12 @@ import {
   Pressable,
   FlatList,
   Image,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch, useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -17,7 +20,8 @@ import GlobalColors from '../GlobalStyles/colors';
 import Fontconfig from '../GlobalStyles/Fontconfig';
 import PlaceCard from '../components/AppComponents/PlaceCard';
 import OrderItemCard from '../components/AppComponents/OrderItemCard';
-import {orders, Places} from '../Data';
+import {getBookmarksAsync} from '../store/dux/userRedux';
+import {orders} from '../Data';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -33,8 +37,19 @@ const NAV_DATA = [
 ];
 
 const TripPlanScreen = () => {
+  const isFocused = useIsFocused();
   const [selectedNav, setSelectedNav] = useState('Trips');
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const {bookmarks, bookmarksLoading, bookmarksError} = useSelector(
+    state => state.user,
+  );
+
+  useEffect(() => {
+    if (isFocused) {
+      dispatch(getBookmarksAsync());
+    }
+  }, [isFocused]);
 
   return (
     <View style={[GlobalStyles.screen]}>
@@ -62,7 +77,7 @@ const TripPlanScreen = () => {
           {selectedNav !== 'Trips' ? (
             <FlatList
               showsHorizontalScrollIndicator={false}
-              data={Places}
+              data={bookmarks}
               keyExtractor={item => item.id}
               renderItem={({item}) => {
                 return (
@@ -71,6 +86,7 @@ const TripPlanScreen = () => {
                     onPress={() => {
                       navigation.navigate('TripPlan', {
                         screen: 'PlaceDetail',
+                        params: {place: item},
                       });
                     }}
                     placeCardStyle={{
