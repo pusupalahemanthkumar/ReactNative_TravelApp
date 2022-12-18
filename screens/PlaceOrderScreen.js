@@ -25,11 +25,13 @@ const PlaceOrderScreen = () => {
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
-        <GoBackBtn customPressHandler= {()=>{
-          navigation.navigate("TripPlan",{
-            screen : 'TripPlanScreen',
-          })
-        }}/>
+        <GoBackBtn 
+        // customPressHandler= {()=>{
+        //   navigation.navigate("TripPlan",{
+        //     screen : 'TripPlanScreen',
+        //   })
+        // }}
+        />
         <Text style={[GlobalStyles.screenTitleText, GlobalStyles.container]}>
           Hello ! Please fill the below details
         </Text>
@@ -60,10 +62,11 @@ const PlaceOrderScreen = () => {
             onChangeText={val => { setPlaceName(val)}}
           />
            <GenericInput
-            type="TEXT"
-            placeholder="Enter Journey Date : DD/MM/YYYY"
-            value={date}
-            onChangeText={val => { setDate(val)}}
+            type="DATE"
+            placeholder="Choose Date "
+            // value={date}
+            // onChangeText={val => { setDate(val)}}
+            onDateChange = {(date)=> setDate(date)}
           />
           <FullWidthBtn
             onPress={() => {}}

@@ -24,7 +24,6 @@ const HomeStack = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
-      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 };
@@ -38,7 +37,6 @@ const SearchStack =() =>{
       }}>
       <Stack.Screen name="SearchScreen" component={SearchScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
-      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 
@@ -53,7 +51,6 @@ const TripPlanStack = () =>{
       }}>
       <Stack.Screen name="TripPlanScreen" component={TripPlanScreen} />
       <Stack.Screen name="PlaceDetail" component={PlaceDetailScreen} />
-      <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
     </Stack.Navigator>
   );
 
@@ -145,4 +142,17 @@ const TravelRoutes = () => {
   );
 };
 
-export default TravelRoutes;
+const MainTravelRoutes = () =>{
+  return (
+    <Stack.Navigator
+    screenOptions={{
+      headerShown: false,
+      animation: 'slide_from_bottom',
+    }}>
+    <Stack.Screen name="Travel" component={TravelRoutes} />
+    <Stack.Screen name="PlaceOrder" component={PlaceOrderScreen} />
+  </Stack.Navigator>
+  )
+}
+
+export default MainTravelRoutes;

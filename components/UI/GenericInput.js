@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import React, {useState, useCallback} from 'react';
 import DocumentPicker, {types} from 'react-native-document-picker';
+import DatePicker from 'react-native-date-picker';
 
 import GlobalImages from '../../GlobalImages/GlobalImages';
 import GlobalStyles from '../../GlobalStyles/styles';
@@ -23,6 +24,7 @@ import GlobalColors from '../../GlobalStyles/colors';
 - value
 - onDocumentSelect(response) and docTypes  for document
 - heightForMultiLineText 
+- onDateChange(date)
 - all Other TextInput attributes
 
 
@@ -31,6 +33,8 @@ import GlobalColors from '../../GlobalStyles/colors';
 const GenericInput = props => {
   const [showPassword, setShowPassword] = useState(false);
   const [fileResponse, setFileResponse] = useState();
+  const [date, setDate] = useState(new Date());
+  const [openDateModal, setOpenDateModal] = useState(false);
 
   const handleDocumentSelection = useCallback(async () => {
     try {
@@ -114,16 +118,15 @@ const GenericInput = props => {
       );
     } else if (type === 'MULTI_LINE_TEXT') {
       let height = 100;
-      if(props.heightForMultiLineText){
+      if (props.heightForMultiLineText) {
         height = props.heightForMultiLineText;
       }
       return (
         <View style={GlobalStyles.inputContainer}>
           <TextInput
-            style={[GlobalStyles.input, {textAlignVertical: 'top', height : height }]}
+            style={[GlobalStyles.input]}
             placeholder="Enter Multi Line Text"
             secureTextEntry={false}
-            multiline
             {...props}
           />
         </View>
@@ -135,7 +138,7 @@ const GenericInput = props => {
             style={[GlobalStyles.input]}
             placeholder="Select Document"
             editable={false}
-            value={ fileResponse && fileResponse[0].name}
+            value={fileResponse && fileResponse[0].name}
             {...props}
           />
           <Pressable
@@ -156,6 +159,39 @@ const GenericInput = props => {
             />
           </Pressable>
         </View>
+      );
+    } else if (type === 'DATE') {
+      return (
+        <>
+          <Pressable
+            style={GlobalStyles.inputContainer}
+            onPress={() => {
+              setOpenDateModal(true);
+            }}>
+            <TextInput
+              style={[GlobalStyles.input]}
+              placeholder="Enter Date"
+              value={date.toISOString()}
+              editable={false}
+              secureTextEntry={false}
+              {...props}
+            />
+          </Pressable>
+          <DatePicker
+            modal
+            open={openDateModal}
+            date={date}
+            onConfirm={date => {
+              setOpenDateModal(false);
+              setDate(date);
+              console.log(date);
+              props.onDateChange(date);
+            }}
+            onCancel={() => {
+              setOpenDateModal(false);
+            }}
+          />
+        </>
       );
     }
   };

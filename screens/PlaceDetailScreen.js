@@ -1,5 +1,12 @@
-import {ScrollView, StyleSheet, Text, View, Image, Pressable} from 'react-native';
-import React, { useState } from 'react';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Pressable,
+} from 'react-native';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
@@ -12,7 +19,7 @@ import Fontconfig from '../GlobalStyles/Fontconfig';
 import GalleryView from '../components/UI/GalleryView';
 import GoBackBtn from '../components/UI/GoBackBtn';
 import FullWidthBtn from '../components/UI/FullWidthBtn';
-import { toogleBookmarkAsync } from "../store/dux/userRedux"
+import {toogleBookmarkAsync} from '../store/dux/userRedux';
 
 const PlaceDetailScreen = () => {
   const navigation = useNavigation();
@@ -34,7 +41,9 @@ const PlaceDetailScreen = () => {
         <View style={[styles.mainContainer, GlobalStyles.container]}>
           <View style={[styles.TitleContainer]}>
             <Text style={[styles.title]}>{place.placeName}</Text>
-            <Pressable style={[styles.savePlacebtn]} onPress={onCardClickHandler}>
+            <Pressable
+              style={[styles.savePlacebtn]}
+              onPress={onCardClickHandler}>
               <Image
                 style={[
                   styles.savePlaceIcon,
@@ -56,9 +65,8 @@ const PlaceDetailScreen = () => {
           <FullWidthBtn
             onPress={() => {
               console.log('TEST');
-              navigation.navigate('TripPlan', {
-                screen: 'PlaceOrder',
-                params : {place : place}
+              navigation.navigate('PlaceOrder', {
+                place: place,
               });
             }}
             rippleColor={GlobalColors.lightColor2}
