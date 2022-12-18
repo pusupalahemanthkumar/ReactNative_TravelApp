@@ -12,6 +12,7 @@ import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 import {types} from 'react-native-document-picker';
+import RNFS from 'react-native-fs';
 
 import GlobalStyles from '../GlobalStyles/styles';
 import GlobalImages from '../GlobalImages/GlobalImages';
@@ -37,15 +38,22 @@ const RegisterScreen = () => {
 
   const registerHandler = () => {
     console.log('Register');
-    console.log({
-      username,
-      email,
-      password,
-      confirmPassword,
-      phoneNumber,
-      profileImage,
+    const payload = {
+      userName : username,
+      email : email,
+      phoneNumber : phoneNumber,
+      password : password,
+      image: profileImage,
+    }
+    dispatch(registerAync(payload));
+  };
+
+  const imagePickerHandler = res => {
+    console.log(res);
+    RNFS.readFile(res[0].uri, 'base64').then(base64 => {
+      console.log(`data:${res[0].type};base64,${base64}`);
+      setProfileImage(`data:${res[0].type};base64,${base64}`);
     });
-    dispatch(registerAync(username, email, password, confirmPassword));
   };
 
   return (
@@ -85,10 +93,7 @@ const RegisterScreen = () => {
             type="DOCUMENT"
             placeholder="Upload Photo"
             docTypes={[types.images]}
-            onDocumentSelect={res => {
-              console.log('document', res);
-              setProfileImage(res[0]);
-            }}
+            onDocumentSelect={imagePickerHandler}
           />
           <GenericInput
             type="PASSWORD"

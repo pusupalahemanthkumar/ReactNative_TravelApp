@@ -10,10 +10,12 @@ import Fontconfig from '../GlobalStyles/Fontconfig';
 import GoBackBtn from '../components/UI/GoBackBtn';
 import FullWidthBtn from '../components/UI/FullWidthBtn';
 import GenericInput from '../components/UI/GenericInput';
+import { placeOrderAsync } from "../store/dux/OrderRedux";
 
 const PlaceOrderScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
+  const dispatch = useDispatch();
   const place = route.params.place;
   const {user} = useSelector(state => state.user);
 
@@ -22,6 +24,22 @@ const PlaceOrderScreen = () => {
   const [phoneNumber, setPhoneNumber] = useState(user.phoneNumber);
   const [placeName, setPlaceName] = useState(place.placeName);
   const [date,setDate] = useState();
+
+  const placeOrderHandler =() =>{
+    const payload = {
+      userId : user._id,
+      placeId : place._id,
+      userName : name,
+      email : email,
+      phoneNumber : phoneNumber,
+      price : place.price,
+      placeName : place.placeName,
+      journeyDate : date,
+    }
+    console.log(payload);
+    dispatch(placeOrderAsync(payload));
+    navigation.navigate("TripPlan");
+  }
   return (
     <View style={[GlobalStyles.screen]}>
       <ScrollView>
@@ -61,15 +79,19 @@ const PlaceOrderScreen = () => {
             value={placeName}
             onChangeText={val => { setPlaceName(val)}}
           />
+          <GenericInput
+            type="TEXT"
+            placeholder="Price"
+            editable={false}
+            value={`${place.price}`}
+          />
            <GenericInput
             type="DATE"
-            placeholder="Choose Date "
-            // value={date}
-            // onChangeText={val => { setDate(val)}}
+            placeholder="Choose Date"
             onDateChange = {(date)=> setDate(date)}
           />
           <FullWidthBtn
-            onPress={() => {}}
+            onPress={() => {placeOrderHandler()}}
             rippleColor={GlobalColors.lightColor2}
             label="confirm"
             containerStyle={{

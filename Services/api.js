@@ -12,6 +12,7 @@ class Api {
         'Content-Type': 'application/json',
       },
     };
+    console.log(`${BASE_URL}${url}`);
     const {data} = await axios.post(`${BASE_URL}${url}`, payload, config);
     return data;
   }

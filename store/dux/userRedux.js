@@ -33,26 +33,17 @@ export const loginAsync = (email, password) => {
 };
 
 export const registerAync = (
-  username,
-  email,
-  phoneNumber,
-  profileImage,
-  password,
+ payload
 ) => {
   return async (dispatch, getState) => {
     try {
       dispatch(onLoading(true));
       const api = new Api();
-      const data = await api.postMethod(`/users/register`, {
-        username,
-        email,
-        phoneNumber,
-        profileImage,
-        password,
-      });
+      const data = await api.postMethod(`/users/register`, payload);
       await  storeData('user',data);
       dispatch(register(data));
     } catch (error) {
+      console.log(error);
       const message =
         error.response && error.response.data.message
           ? error.response.data.message

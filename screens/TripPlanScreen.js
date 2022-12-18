@@ -21,7 +21,7 @@ import Fontconfig from '../GlobalStyles/Fontconfig';
 import PlaceCard from '../components/AppComponents/PlaceCard';
 import OrderItemCard from '../components/AppComponents/OrderItemCard';
 import {getBookmarksAsync} from '../store/dux/userRedux';
-import {orders} from '../Data';
+import {getOrdersAsync} from '../store/dux/OrderRedux';
 
 const {width, height} = Dimensions.get('screen');
 
@@ -45,9 +45,14 @@ const TripPlanScreen = () => {
     state => state.user,
   );
 
+  const {orders, ordersLoading, ordersError} = useSelector(
+    state => state.order,
+  );
+
   useEffect(() => {
     if (isFocused) {
       dispatch(getBookmarksAsync());
+      dispatch(getOrdersAsync());
     }
   }, [isFocused]);
 

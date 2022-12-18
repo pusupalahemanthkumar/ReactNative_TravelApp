@@ -72,6 +72,7 @@ const HomeScreen = () => {
   const dispatch = useDispatch();
 
   const {deals, dealsLoading, dealsError} = useSelector(state => state.place);
+  const {user } = useSelector(state=>state.user);
 
   useEffect(() => {
     if (isFocused) {
@@ -100,7 +101,7 @@ const HomeScreen = () => {
             source={GlobalImages.homeScreenWallpaper}
             style={[styles.backgroundImage]}>
             <ShowcaseHeaderTop
-              profileUri={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80`}
+              profileUri={`${user.image}`}
               onPressLogout={() => { dispatch(logoutAsync()) } }
               onPressBell={() => {}}
               onPressprofile={() => {}}
