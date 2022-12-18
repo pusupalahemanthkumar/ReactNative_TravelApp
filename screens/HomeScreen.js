@@ -23,6 +23,7 @@ import ShowcaseIconCard from '../components/AppComponents/ShowcaseIconCard';
 import ShowcaseHeaderTop from '../components/AppComponents/ShowcaseHeaderTop';
 import PlaceCard from '../components/AppComponents/PlaceCard';
 import {getDealsAsync} from '../store/dux/placeRedux';
+import { logoutAsync} from "../store/dux/userRedux"
 
 const {width, height} = Dimensions.get('screen');
 
@@ -100,7 +101,7 @@ const HomeScreen = () => {
             style={[styles.backgroundImage]}>
             <ShowcaseHeaderTop
               profileUri={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlciUyMHByb2ZpbGV8ZW58MHx8MHx8&w=1000&q=80`}
-              onPressQR={() => {}}
+              onPressLogout={() => { dispatch(logoutAsync()) } }
               onPressBell={() => {}}
               onPressprofile={() => {}}
             />

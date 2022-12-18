@@ -3,6 +3,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 import Api from '../../Services/api';
 import { getPlaces }  from "./placeRedux";
+import { getData , storeData, removeValue}  from "../../Services/asyncStorage"
 
 const initialState = {
   loading: false,
@@ -19,6 +20,7 @@ export const loginAsync = (email, password) => {
       dispatch(onLoading(true));
       const api = new Api();
       const data = await api.postMethod(`/users/login`, {email, password});
+      await  storeData('user',data);
       dispatch(login(data));
     } catch (error) {
       const message =
@@ -48,6 +50,7 @@ export const registerAync = (
         profileImage,
         password,
       });
+      await  storeData('user',data);
       dispatch(register(data));
     } catch (error) {
       const message =
@@ -77,6 +80,13 @@ export const getBookmarksAsync = () => {
   };
 };
 
+export const logoutAsync = () =>{
+  return async (dispatch, state) =>{
+    await removeValue('user');
+    dispatch(logout());
+  }
+}
+
 export const toogleBookmarkAsync = (id) =>{
   return async (dispatch, getState) =>{
     const token = getState().user.user.token;
@@ -97,6 +107,14 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setUserData : (state, action) =>{
+      state.user = action.payload;
+    },
+    logout : (state,action) =>{
+      state.user = null;
+      state.loading = false;
+      state.error = null;
+    },
     login: (state, action) => {
       state.user = action.payload;
       state.loading = false;
@@ -142,7 +160,9 @@ export const {
   onLoadingBookmarks,
   getBookmarks,
   onErrorBookmarks,
-  updateBookmarksIds
+  updateBookmarksIds,
+  logout,
+  setUserData
 } = userSlice.actions;
 
 export default userSlice.reducer;

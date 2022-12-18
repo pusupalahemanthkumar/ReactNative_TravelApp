@@ -26,10 +26,10 @@ const ShowcaseHeaderTop = (props) => {
         />
       </Pressable>
       <View style={[styles.showcaseActions]}>
-        <Pressable style={[styles.iconCotainer]} onPress ={props.onPressQR}>
+        <Pressable style={[styles.iconCotainer]} onPress ={props.onPressbell}>
           <Image source={GlobalImages.bellIcon} />
         </Pressable>
-        <Pressable style={[styles.iconCotainer]} onPress ={props.onPressbell} >
+        <Pressable style={[styles.iconCotainer]} onPress ={props.onPressLogout} >
           <Image source={GlobalImages.logoutIcon} />
         </Pressable>
       </View>
